@@ -1,0 +1,518 @@
+/* ==========================================================================
+   진주 문화유적 사이트 — 공유 스타일시트
+   컨셉: 남강(南江)의 밤, 유등(流燈)이 흘러가는 진주성의 풍경
+   ========================================================================== */
+
+:root {
+  /* Color tokens */
+  --ink: #211d1a;          /* 진주성 야간 돌담의 깊은 먹빛 */
+  --ink-soft: #3a332c;
+  --paper: #f3ecdc;        /* 한지빛 */
+  --paper-dim: #e8ddc4;
+  --river: #234b56;        /* 남강의 짙은 청록 */
+  --river-light: #3f7d8c;
+  --lantern: #e2872f;      /* 유등의 주황빛 */
+  --lantern-light: #f6c169;
+  --dancheong: #a63d40;    /* 단청의 붉은빛, 포인트 전용 */
+  --pine: #4b6350;
+
+  --font-display: "Noto Serif KR", serif;
+  --font-body: "Noto Sans KR", -apple-system, sans-serif;
+
+  --container: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+img { max-width: 100%; display: block; }
+
+.wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ---------- 헤더 ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(243, 236, 220, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(33, 29, 26, 0.1);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+
+.brand .lantern-mark { width: 22px; height: 28px; }
+
+.site-nav {
+  display: flex;
+  gap: 28px;
+  font-size: 0.92rem;
+}
+
+.site-nav a {
+  position: relative;
+  padding: 6px 0;
+  color: var(--ink-soft);
+  transition: color 0.2s ease;
+}
+
+.site-nav a:hover { color: var(--dancheong); }
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--river);
+  font-weight: 600;
+}
+.back-link:hover { color: var(--dancheong); }
+
+/* ---------- 히어로 (시그니처: 흐르는 유등) ---------- */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: linear-gradient(180deg, #1a2f36 0%, var(--river) 55%, #1a2f36 100%);
+  color: var(--paper);
+}
+
+.hero-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(230,180,100,0.12), transparent 60%);
+}
+
+.lantern-river {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.lantern-float {
+  position: absolute;
+  bottom: 8%;
+  animation: drift 22s linear infinite;
+  opacity: 0.9;
+}
+.lantern-float svg { width: 100%; height: 100%; }
+.lantern-float.f1 { left: -10%; width: 46px; animation-duration: 26s; animation-delay: 0s; }
+.lantern-float.f2 { left: -10%; width: 30px; bottom: 14%; animation-duration: 19s; animation-delay: -6s; }
+.lantern-float.f3 { left: -10%; width: 58px; bottom: 4%; animation-duration: 31s; animation-delay: -14s; }
+.lantern-float.f4 { left: -10%; width: 34px; bottom: 20%; animation-duration: 24s; animation-delay: -3s; }
+.lantern-float.f5 { left: -10%; width: 40px; bottom: 10%; animation-duration: 28s; animation-delay: -20s; }
+.lantern-float.f6 { left: -10%; width: 26px; bottom: 17%; animation-duration: 21s; animation-delay: -10s; }
+
+@keyframes drift {
+  from { transform: translateX(0) translateY(0); }
+  50%  { transform: translateX(58vw) translateY(-6px); }
+  to   { transform: translateX(120vw) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lantern-float { animation: none; left: 20%; }
+  .lantern-float.f2 { left: 45%; }
+  .lantern-float.f3 { left: 68%; }
+  .lantern-float.f4 { left: 32%; }
+  .lantern-float.f5 { left: 80%; }
+  .lantern-float.f6 { left: 12%; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  padding-bottom: 88px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  color: var(--lantern-light);
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  line-height: 0.98;
+  margin: 0 0 22px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.hero p.lede {
+  max-width: 560px;
+  font-size: 1.08rem;
+  color: rgba(243, 236, 220, 0.86);
+  margin: 0 0 8px;
+}
+
+.hero-scroll-cue {
+  position: absolute;
+  right: 32px;
+  bottom: 32px;
+  font-size: 0.78rem;
+  color: rgba(243,236,220,0.6);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- 섹션 공통 ---------- */
+section { padding: 96px 0; }
+
+.section-head {
+  max-width: 640px;
+  margin: 0 0 56px;
+}
+
+.section-eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--dancheong);
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  margin: 0 0 14px;
+  font-weight: 700;
+}
+
+.section-head p { color: var(--ink-soft); font-size: 1.02rem; }
+
+/* ---------- 카드 그리드 (탐방 목록) ---------- */
+.site-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(33,29,26,0.12);
+  border: 1px solid rgba(33,29,26,0.12);
+}
+
+.site-card {
+  background: var(--paper);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 320px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.site-card:hover {
+  background: var(--paper-dim);
+  transform: translateY(-3px);
+}
+
+.site-card .tag {
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  color: var(--river);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.site-card .icon {
+  width: 52px;
+  height: 52px;
+  color: var(--dancheong);
+}
+
+/* ---------- 카드 상단 일러스트 ---------- */
+.card-visual {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.card-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.site-card:hover .card-visual svg { transform: scale(1.045); }
+
+/* ---------- 히어로 스카이라인 일러스트 ---------- */
+.hero-skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-skyline svg { width: 100%; height: auto; display: block; }
+
+.site-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  margin: 0;
+  font-weight: 700;
+}
+
+.site-card p {
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  margin: 0;
+  flex-grow: 1;
+}
+
+.site-card .go {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.site-card:hover .go { color: var(--dancheong); }
+
+@media (max-width: 900px) {
+  .site-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .site-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- 구분 요소: 등불 디바이더 ---------- */
+.lantern-divider {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--river);
+  margin: 0 0 40px;
+}
+.lantern-divider::before,
+.lantern-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(33,29,26,0.15);
+}
+.lantern-divider svg { width: 20px; height: 24px; }
+
+/* ---------- 상세 페이지 공통 ---------- */
+.detail-hero {
+  min-height: 56vh;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  color: var(--paper);
+  padding-bottom: 64px;
+  background-size: cover;
+  background-position: center;
+}
+.detail-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(26,47,54,0.2) 0%, rgba(20,20,18,0.86) 100%);
+}
+.detail-hero .wrap { position: relative; z-index: 2; }
+.detail-hero .hero-eyebrow { color: var(--lantern-light); }
+.detail-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5.6vw, 4.2rem);
+  font-weight: 900;
+  margin: 0 0 14px;
+}
+.detail-hero .lede { max-width: 620px; color: rgba(243,236,220,0.88); font-size: 1.05rem; }
+
+.info-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+  gap: 24px;
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(33,29,26,0.12);
+  margin-bottom: 56px;
+}
+.info-item .label {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  color: var(--river);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.info-item .value { font-size: 0.98rem; font-weight: 600; }
+
+.prose {
+  max-width: 720px;
+}
+.prose h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  margin: 48px 0 18px;
+}
+.prose h2:first-child { margin-top: 0; }
+.prose p { color: var(--ink-soft); margin: 0 0 18px; font-size: 1rem; }
+.prose ul { color: var(--ink-soft); padding-left: 20px; }
+.prose li { margin-bottom: 8px; }
+
+.pull-quote {
+  border-left: 3px solid var(--dancheong);
+  padding: 6px 0 6px 24px;
+  margin: 32px 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+.pull-quote cite {
+  display: block;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.82rem;
+  color: var(--river);
+  margin-top: 8px;
+}
+
+.fact-card {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 40px;
+  margin: 56px 0;
+}
+.fact-card h3 {
+  font-family: var(--font-display);
+  color: var(--lantern-light);
+  font-size: 1.1rem;
+  margin: 0 0 16px;
+}
+.fact-card ul { margin: 0; padding-left: 18px; color: rgba(243,236,220,0.86); }
+.fact-card li { margin-bottom: 10px; font-size: 0.95rem; }
+
+.related {
+  padding: 72px 0 96px;
+  border-top: 1px solid rgba(33,29,26,0.12);
+}
+.related h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 32px;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.related-card {
+  border: 1px solid rgba(33,29,26,0.15);
+  padding: 24px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.related-card:hover { border-color: var(--dancheong); transform: translateY(-2px); }
+.related-card .tag {
+  font-size: 0.72rem; letter-spacing: 0.12em; color: var(--river); font-weight: 700;
+}
+.related-card h4 { font-family: var(--font-display); margin: 8px 0; font-size: 1.05rem; }
+.related-card p { font-size: 0.86rem; color: var(--ink-soft); margin: 0; }
+
+@media (max-width: 800px) {
+  .related-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- 갤러리 스트립 ---------- */
+.gallery-strip {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+  margin: 40px 0;
+}
+.gallery-strip .g-tall { grid-row: span 2; }
+.gallery-strip img, .gallery-strip .ph {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 2px;
+}
+.gallery-strip .ph {
+  min-height: 140px;
+  display: flex;
+  align-items: flex-end;
+  padding: 14px;
+  color: rgba(243,236,220,0.85);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  background: linear-gradient(150deg, var(--river), var(--ink));
+}
+.gallery-strip .g-tall.ph { min-height: 296px; }
+.gallery-strip .ph.alt { background: linear-gradient(150deg, var(--dancheong), var(--ink-soft)); }
+.gallery-strip .ph.alt2 { background: linear-gradient(150deg, var(--lantern), var(--ink-soft)); }
+
+/* ---------- 푸터 ---------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(243,236,220,0.7);
+  padding: 56px 0 40px;
+  font-size: 0.88rem;
+}
+.site-footer .foot-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+.site-footer .brand { color: var(--paper); }
+.foot-links { display: flex; gap: 24px; flex-wrap: wrap; }
+.foot-links a:hover { color: var(--lantern-light); }
+.site-footer .foot-bottom {
+  border-top: 1px solid rgba(243,236,220,0.15);
+  padding-top: 20px;
+  font-size: 0.8rem;
+  color: rgba(243,236,220,0.45);
+}
+
+:focus-visible {
+  outline: 2px solid var(--dancheong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .site-nav { display: none; }
+  section { padding: 64px 0; }
+  .info-strip { grid-template-columns: repeat(2,1fr); }
+}
